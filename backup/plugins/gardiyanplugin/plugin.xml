@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+   <class>org.igniterealtime.openfire.gardiyan.GardiyanPlugin</class>
+   <name>Gardiyan Agent Registration</name>
+   <description>Yeni kullanıcı eklendiğinde otamatik olarak roster oluşturur.</description>
+   <author>Cekino Savunma Elektronik ve Bilisim A.S.</author>
+   <version>1.0.1</version>
+   <date>27/05/2021</date>
+   <minServerVersion>4.0.0</minServerVersion>
+    <!-- And if it won't work after:
+   <maxServerVersion>4.3.0</maxServerVersion>
+   -->
+</plugin>
