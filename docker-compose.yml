@@ -1,6 +1,40 @@
 version: "3.8"
 
 services:
+  db:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Cekino.123!
+    ports:
+      - "7100:5432"
+    volumes:
+    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    #  - ./karcin_auth.sql:/docker-entrypoint-initdb.d/karcin_auth.sql
+    #  - ./karcin_log.sql:/docker-entrypoint-initdb.d/karcin_log.sql
+    #  - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/karcin_mdm.sql
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./karcin_auth.sql:/data/karcin_auth.sql
+      - ./karcin_log.sql:/data/karcin_log.sql
+      - ./karcin_mdm.sql:/data/karcin_mdm.sql
+    command: >
+      bash -c "
+        docker-entrypoint.sh postgres &&
+        pg_isready -U postgres &&
+        psql -U postgres -c 'CREATE DATABASE karcin_auth;' &&
+        psql -U postgres -c 'CREATE DATABASE karcin_log;' &&
+        psql -U postgres -c 'CREATE DATABASE karcin_mdm;' &&
+        pg_restore -U postgres -d karcin_auth /data/karcin_auth.sql &&
+        pg_restore -U postgres -d karcin_log /data/karcin_log.sql &&
+        pg_restore -U postgres -d karcin_mdm /data/karcin_mdm.sql "
+      
+    networks:
+      - my_network
+
   auth_frontend:
     image: dockerdev.cekino.com/auth_frontend:2.5.3.13
     container_name: auth_frontend
@@ -55,40 +89,6 @@ services:
       - db
       - mongodb
       - rabbitmq
-    networks:
-      - my_network
-
-  db:
-    image: postgres:13
-    container_name: postgres
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Cekino.123!
-    ports:
-      - "7100:5432"
-    volumes:
-    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    #  - ./karcin_auth.sql:/docker-entrypoint-initdb.d/karcin_auth.sql
-    #  - ./karcin_log.sql:/docker-entrypoint-initdb.d/karcin_log.sql
-    #  - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/karcin_mdm.sql
-    volumes:
-      - db_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./karcin_auth.sql:/data/karcin_auth.sql
-      - ./karcin_log.sql:/data/karcin_log.sql
-      - ./karcin_mdm.sql:/data/karcin_mdm.sql
-    command: >
-      bash -c "
-        docker-entrypoint.sh postgres &&
-        pg_isready -U postgres &&
-        psql -U postgres -c 'CREATE DATABASE karcin_auth;' &&
-        psql -U postgres -c 'CREATE DATABASE karcin_log;' &&
-        psql -U postgres -c 'CREATE DATABASE karcin_mdm;' &&
-        pg_restore -U postgres -d karcin_auth /data/karcin_auth.sql &&
-        pg_restore -U postgres -d karcin_log /data/karcin_log.sql &&
-        pg_restore -U postgres -d karcin_mdm /data/karcin_mdm.sql "
-      
     networks:
       - my_network
 

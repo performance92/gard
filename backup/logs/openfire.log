@@ -16603,3 +16603,435 @@ Caused by: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not ex
 2024.12.02 07:50:23.146 [32mINFO [m [Jetty-QTP-AdminConsole-37]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Sequences
 2024.12.02 07:54:52.050 [32mINFO [m [Jetty-QTP-AdminConsole-33]: org.directwebremoting.log.startup - Starting: DwrServlet v3.0.3-dev on jetty/10.0.18 / JDK 11.0.16 from Oracle Corporation at 
 2024.12.02 07:54:52.111 [32mINFO [m [Jetty-QTP-AdminConsole-33]: org.directwebremoting.log.startup - Starting: Using container abstraction org.directwebremoting.server.servlet3.Servlet30ContainerAbstraction
+2024.12.02 10:02:39.039 [32mINFO [m [main]: org.jivesoftware.openfire.XMPPServer - Registering shutdown hook (standalone mode)
+2024.12.02 10:02:40.640 [32mINFO [m [main]: org.jivesoftware.database.SchemaManager - Missing database schema for openfire. Attempting to install...
+2024.12.02 10:02:40.652 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - SchemaManager: Failed to execute SQL:
+ CREATE TABLE ofUser (   username              VARCHAR(64)     NOT NULL,   storedKey             VARCHAR(32),   serverKey             VARCHAR(32),   salt                  VARCHAR(32),   iterations            INTEGER,   plainPassword         VARCHAR(32),   encryptedPassword     VARCHAR(255),   name                  VARCHAR(100),   email                 VARCHAR(100),   creationDate          CHAR(15)        NOT NULL,   modificationDate      CHAR(15)        NOT NULL,   CONSTRAINT ofUser_pk PRIMARY KEY (username) );
+2024.12.02 10:02:40.653 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - ERROR: no schema has been selected to create in
+  Position: 15
+org.postgresql.util.PSQLException: ERROR: no schema has been selected to create in
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:341) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:326) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:302) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:297) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.database.SchemaManager.executeSQLScript(SchemaManager.java:388) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkSchema(SchemaManager.java:237) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkOpenfireSchema(SchemaManager.java:85) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.setConnectionProvider(DbConnectionManager.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.ensureConnectionProvider(DbConnectionManager.java:101) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.getConnection(DbConnectionManager.java:162) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:472) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:02:40.689 [1;31mERROR[m [main]: org.jivesoftware.util.JiveProperties - ERROR: relation "ofproperty" does not exist
+  Position: 44
+org.postgresql.util.PSQLException: ERROR: relation "ofproperty" does not exist
+  Position: 44
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:474) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:02:41.032 [32mINFO [m [main]: org.jivesoftware.util.cache.ConsistencyMonitor - Applying configuration for cache consistency check. Enabled: false
+2024.12.02 10:02:41.049 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - Database could not be accessed
+org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:02:41.050 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+java.lang.IllegalArgumentException: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1024) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) ~[xmppserver-4.9.2.jar:4.9.2]
+	... 9 more
+2024.12.02 10:11:52.447 [32mINFO [m [main]: org.jivesoftware.openfire.XMPPServer - Registering shutdown hook (standalone mode)
+2024.12.02 10:11:53.919 [32mINFO [m [main]: org.jivesoftware.database.SchemaManager - Missing database schema for openfire. Attempting to install...
+2024.12.02 10:11:53.959 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - SchemaManager: Failed to execute SQL:
+ CREATE TABLE ofUser (   username              VARCHAR(64)     NOT NULL,   storedKey             VARCHAR(32),   serverKey             VARCHAR(32),   salt                  VARCHAR(32),   iterations            INTEGER,   plainPassword         VARCHAR(32),   encryptedPassword     VARCHAR(255),   name                  VARCHAR(100),   email                 VARCHAR(100),   creationDate          CHAR(15)        NOT NULL,   modificationDate      CHAR(15)        NOT NULL,   CONSTRAINT ofUser_pk PRIMARY KEY (username) );
+2024.12.02 10:11:53.960 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - ERROR: no schema has been selected to create in
+  Position: 15
+org.postgresql.util.PSQLException: ERROR: no schema has been selected to create in
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:341) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:326) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:302) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:297) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.database.SchemaManager.executeSQLScript(SchemaManager.java:388) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkSchema(SchemaManager.java:237) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkOpenfireSchema(SchemaManager.java:85) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.setConnectionProvider(DbConnectionManager.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.ensureConnectionProvider(DbConnectionManager.java:101) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.getConnection(DbConnectionManager.java:162) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:472) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:11:53.987 [1;31mERROR[m [main]: org.jivesoftware.util.JiveProperties - ERROR: relation "ofproperty" does not exist
+  Position: 44
+org.postgresql.util.PSQLException: ERROR: relation "ofproperty" does not exist
+  Position: 44
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:474) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:11:54.177 [32mINFO [m [main]: org.jivesoftware.util.cache.ConsistencyMonitor - Applying configuration for cache consistency check. Enabled: false
+2024.12.02 10:11:54.231 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - Database could not be accessed
+org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:11:54.234 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+java.lang.IllegalArgumentException: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1024) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) ~[xmppserver-4.9.2.jar:4.9.2]
+	... 9 more
+2024.12.02 10:13:34.031 [32mINFO [m [main]: org.jivesoftware.openfire.XMPPServer - Registering shutdown hook (standalone mode)
+2024.12.02 10:13:34.301 [32mINFO [m [main]: org.jivesoftware.database.SchemaManager - Missing database schema for openfire. Attempting to install...
+2024.12.02 10:13:34.306 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - SchemaManager: Failed to execute SQL:
+ CREATE TABLE ofUser (   username              VARCHAR(64)     NOT NULL,   storedKey             VARCHAR(32),   serverKey             VARCHAR(32),   salt                  VARCHAR(32),   iterations            INTEGER,   plainPassword         VARCHAR(32),   encryptedPassword     VARCHAR(255),   name                  VARCHAR(100),   email                 VARCHAR(100),   creationDate          CHAR(15)        NOT NULL,   modificationDate      CHAR(15)        NOT NULL,   CONSTRAINT ofUser_pk PRIMARY KEY (username) );
+2024.12.02 10:13:34.306 [1;31mERROR[m [main]: org.jivesoftware.database.SchemaManager - ERROR: no schema has been selected to create in
+  Position: 15
+org.postgresql.util.PSQLException: ERROR: no schema has been selected to create in
+  Position: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:341) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:326) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:302) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:297) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:193) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.database.SchemaManager.executeSQLScript(SchemaManager.java:388) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkSchema(SchemaManager.java:237) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.SchemaManager.checkOpenfireSchema(SchemaManager.java:85) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.setConnectionProvider(DbConnectionManager.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.ensureConnectionProvider(DbConnectionManager.java:101) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.database.DbConnectionManager.getConnection(DbConnectionManager.java:162) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:472) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:13:34.314 [1;31mERROR[m [main]: org.jivesoftware.util.JiveProperties - ERROR: relation "ofproperty" does not exist
+  Position: 44
+org.postgresql.util.PSQLException: ERROR: relation "ofproperty" does not exist
+  Position: 44
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.util.JiveProperties.loadProperties(JiveProperties.java:474) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.init(JiveProperties.java:108) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveProperties.getInstance(JiveProperties.java:84) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.JiveGlobals.getProperty(JiveGlobals.java:547) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.util.cache.CacheFactory.<clinit>(CacheFactory.java:102) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.initialize(XMPPServer.java:380) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:660) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:13:34.375 [32mINFO [m [main]: org.jivesoftware.util.cache.ConsistencyMonitor - Applying configuration for cache consistency check. Enabled: false
+2024.12.02 10:13:34.384 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - Database could not be accessed
+org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+2024.12.02 10:13:34.386 [1;31mERROR[m [main]: org.jivesoftware.openfire.XMPPServer - org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+java.lang.IllegalArgumentException: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1024) ~[xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.start(XMPPServer.java:668) [xmppserver-4.9.2.jar:4.9.2]
+	at org.jivesoftware.openfire.XMPPServer.<init>(XMPPServer.java:220) [xmppserver-4.9.2.jar:4.9.2]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) [?:?]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) [?:?]
+	at java.lang.Class.newInstance(Unknown Source) [?:?]
+	at org.jivesoftware.openfire.starter.ServerStarter.start(ServerStarter.java:92) [startup.jar:4.9.2]
+	at org.jivesoftware.openfire.starter.ServerStarter.main(ServerStarter.java:56) [startup.jar:4.9.2]
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "ofid" does not exist
+  Position: 22
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:137) ~[postgresql-42.7.2.jar:42.7.2]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeQuery(DelegatingPreparedStatement.java:122) ~[commons-dbcp2-2.9.0.jar:2.9.0]
+	at org.jivesoftware.openfire.XMPPServer.verifyDataSource(XMPPServer.java:1016) ~[xmppserver-4.9.2.jar:4.9.2]
+	... 9 more
+2024.12.02 10:22:30.111 [32mINFO [m [main]: org.jivesoftware.openfire.XMPPServer - Registering shutdown hook (standalone mode)
+2024.12.02 10:22:30.461 [32mINFO [m [main]: org.jivesoftware.util.cache.ConsistencyMonitor - Applying configuration for cache consistency check. Enabled: false
+2024.12.02 10:22:30.480 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing Servers Cache
+2024.12.02 10:22:30.481 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing Components Cache
+2024.12.02 10:22:30.482 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing Users Cache
+2024.12.02 10:22:30.482 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing AnonymousUsers Cache
+2024.12.02 10:22:30.482 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing User Sessions
+2024.12.02 10:22:30.489 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Roster
+2024.12.02 10:22:30.490 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for RosterItems
+2024.12.02 10:22:30.517 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Routing Result Listeners
+2024.12.02 10:22:30.520 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Multicast Service
+2024.12.02 10:22:30.525 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Offline Message Size
+2024.12.02 10:22:30.528 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for VCard
+2024.12.02 10:22:30.716 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Privacy Lists
+2024.12.02 10:22:30.718 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for File Transfer Cache
+2024.12.02 10:22:30.798 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Offline Presence Cache
+2024.12.02 10:22:30.799 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Last Activity Cache
+2024.12.02 10:22:30.803 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for User
+2024.12.02 10:22:30.803 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Remote Users Existence
+2024.12.02 10:22:30.835 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Components Sessions
+2024.12.02 10:22:30.836 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Connection Managers Sessions
+2024.12.02 10:22:30.836 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Incoming Server Session Info Cache
+2024.12.02 10:22:30.836 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Sessions by Hostname
+2024.12.02 10:22:30.836 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Client Session Info Cache
+2024.12.02 10:22:30.838 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Directed Presences
+2024.12.02 10:22:30.839 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created local-only cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for PEPServiceManager
+2024.12.02 10:22:30.842 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for File Transfer
+2024.12.02 10:22:30.846 [32mINFO [m [main]: org.jivesoftware.openfire.pubsub.PubSubPersistenceProviderManager - Loading PubSub persistence provider: class org.jivesoftware.openfire.pubsub.CachingPubsubPersistenceProvider.
+2024.12.02 10:22:30.849 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Published Items
+2024.12.02 10:22:30.849 [32mINFO [m [main]: org.jivesoftware.openfire.pubsub.CachingPubsubPersistenceProvider - Loading PubSub persistence provider to delegate to: class org.jivesoftware.openfire.pubsub.DefaultPubSubPersistenceProvider.
+2024.12.02 10:22:30.854 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Default Node Configurations
+2024.12.02 10:22:30.871 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Disco Server Features
+2024.12.02 10:22:30.876 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Disco Server Items
+2024.12.02 10:22:30.877 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Components
+2024.12.02 10:22:31.037 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created local-only cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Entity Capabilities
+2024.12.02 10:22:31.037 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created local-only cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Entity Capabilities Users
+2024.12.02 10:22:31.062 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Group
+2024.12.02 10:22:31.063 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Group Metadata Cache
+2024.12.02 10:22:31.067 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created local-only cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Group (Shared) Metadata Cache
+2024.12.02 10:22:31.091 [32mINFO [m [main]: org.jivesoftware.openfire.pubsub.PubSubModule - Publish-Subscribe domain: pubsub.79bdb205d84e
+2024.12.02 10:22:31.103 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for MUC Service Pings Sent
+2024.12.02 10:22:31.106 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for MUC History
+2024.12.02 10:22:31.109 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for MUC Service 'conference' Rooms
+2024.12.02 10:22:31.109 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for MUC Service 'conference' Room Statistics
+2024.12.02 10:22:31.121 [32mINFO [m [main]: org.jivesoftware.openfire.muc.spi.MultiUserChatServiceImpl - Rescheduling user idle task, recurring every PT15M
+2024.12.02 10:22:31.126 [32mINFO [m [main]: org.jivesoftware.openfire.muc.spi.MultiUserChatServiceImpl - Multi User Chat domain: conference.79bdb205d84e
+2024.12.02 10:22:31.150 [32mINFO [m [main]: org.jivesoftware.openfire.XMPPServer - Openfire 4.9.2 [Dec 2, 2024, 10:22:31 AM]
+2024.12.02 10:22:31.323 [33mWARN [m [PluginMonitorTask-2]: org.jivesoftware.openfire.container.AdminConsolePlugin - Admin console: Identity store does not have any certificates. HTTPS will be unavailable.
+2024.12.02 10:22:31.423 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for LDAP UserDN
+2024.12.02 10:22:32.011 [32mINFO [m [main]: org.jivesoftware.openfire.net.SASLAuthentication - Support added for the 'ANONYMOUS' SASL mechanism.
+2024.12.02 10:22:32.011 [32mINFO [m [main]: org.jivesoftware.openfire.net.SASLAuthentication - Support added for the 'PLAIN' SASL mechanism.
+2024.12.02 10:22:32.060 [32mINFO [m [main]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Remote Server Configurations
+2024.12.02 10:22:32.433 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Favicon Misses
+2024.12.02 10:22:32.433 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Favicon Hits
+2024.12.02 10:22:32.461 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.container.AdminConsolePlugin - Admin console listening at http://0.0.0.0:9090
+2024.12.02 10:22:32.462 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.container.PluginManager - Successfully loaded plugin 'admin'.
+2024.12.02 10:22:33.222 [32mINFO [m [PluginMonitorExec-4]: org.jivesoftware.openfire.container.PluginManager - Successfully loaded plugin 'restapi-1.6.0'.
+2024.12.02 10:22:33.264 [32mINFO [m [PluginMonitorExec-5]: org.jivesoftware.openfire.container.PluginManager - Successfully loaded plugin 'search-1.7.4'.
+2024.12.02 10:22:33.297 [32mINFO [m [PluginMonitorExec-2]: org.jivesoftware.openfire.container.PluginManager - Successfully loaded plugin 'userstatus-1.2.2'.
+2024.12.02 10:22:33.311 [32mINFO [m [PluginMonitorExec-3]: org.jivesoftware.openfire.container.PluginManager - Successfully loaded plugin 'gardiyanplugin-1.0.1'.
+2024.12.02 10:22:33.312 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.container.PluginMonitor - Finished processing all plugins.
+2024.12.02 10:22:33.498 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[socket_c2s] - Started.
+2024.12.02 10:22:33.515 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[socket_c2s-directTLS] - Started.
+2024.12.02 10:22:33.519 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[socket_s2s] - Started.
+2024.12.02 10:22:33.524 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[socket_s2s-directTLS] - Started.
+2024.12.02 10:22:33.546 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[component] - Started.
+2024.12.02 10:22:33.551 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[component-directTLS] - Started.
+2024.12.02 10:22:33.556 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[connection_manager] - Started.
+2024.12.02 10:22:33.560 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.spi.ConnectionListener[connection_manager-directTLS] - Started.
+2024.12.02 10:22:33.578 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.http.HttpSessionManager - Starting instance
+2024.12.02 10:22:33.613 [32mINFO [m [PluginMonitorTask-2]: org.jivesoftware.openfire.http.HttpBindManager - HTTP bind service started
+2024.12.02 10:22:34.320 [32mINFO [m [socket_c2s-thread-2]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Locked Out Accounts
+2024.12.02 10:22:48.507 [32mINFO [m [Jetty-QTP-AdminConsole-30]: org.jivesoftware.util.cache.CacheFactory - Created cache [org.jivesoftware.util.cache.DefaultLocalCacheStrategy] for Sequences
+2024.12.02 10:23:53.176 [1;31mERROR[m [socket_c2s-thread-2]: org.jivesoftware.openfire.nio.NettyConnection - Problem during connection close or cleanup
+io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source) ~[netty-transport-4.1.108.Final.jar:4.1.108.Final]
+2024.12.02 10:24:23.338 [32mINFO [m [Jetty-QTP-AdminConsole-37]: org.directwebremoting.log.startup - Starting: DwrServlet v3.0.3-dev on jetty/10.0.18 / JDK 11.0.16 from Oracle Corporation at 
+2024.12.02 10:24:23.405 [32mINFO [m [Jetty-QTP-AdminConsole-37]: org.directwebremoting.log.startup - Starting: Using container abstraction org.directwebremoting.server.servlet3.Servlet30ContainerAbstraction
