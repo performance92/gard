@@ -1,7 +1,5 @@
 \c karcin_mdm
 
-
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -2038,5 +2036,4 @@ ALTER TABLE ONLY public.kr_agent_program_install_result
 --
 -- PostgreSQL database dump complete
 --
-
 

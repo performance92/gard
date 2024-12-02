@@ -1,4 +1,3 @@
-
 \c karcin_auth
 
 SET statement_timeout = 0;
