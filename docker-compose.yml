@@ -1,3 +1,4 @@
+
 version: "3.8"
 
 services:
@@ -5,41 +6,34 @@ services:
     image: postgres:13
     container_name: postgres
     environment:
-      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Cekino.123!
     ports:
       - "7100:5432"
     volumes:
-    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    #  - ./karcin_auth.sql:/docker-entrypoint-initdb.d/karcin_auth.sql
-    #  - ./karcin_log.sql:/docker-entrypoint-initdb.d/karcin_log.sql
-    #  - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/karcin_mdm.sql
-    volumes:
       - db_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./karcin_auth.sql:/data/karcin_auth.sql
-      - ./karcin_log.sql:/data/karcin_log.sql
-      - ./karcin_mdm.sql:/data/karcin_mdm.sql
-    command: >
-      bash -c "
-        docker-entrypoint.sh postgres &&
-        pg_isready -U postgres &&
-        psql -U postgres -c 'CREATE DATABASE karcin_auth;' &&
-        psql -U postgres -c 'CREATE DATABASE karcin_log;' &&
-        psql -U postgres -c 'CREATE DATABASE karcin_mdm;' &&
-        pg_restore -U postgres -d karcin_auth /data/karcin_auth.sql &&
-        pg_restore -U postgres -d karcin_log /data/karcin_log.sql &&
-        pg_restore -U postgres -d karcin_mdm /data/karcin_mdm.sql "
-      
+      - ./init.sql:/docker-entrypoint-initdb.d/00_init.sql
+      - ./karcin_auth.sql:/docker-entrypoint-initdb.d/01_karcin_auth.sql
+      - ./karcin_log.sql:/docker-entrypoint-initdb.d/02_karcin_log.sql
+      - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/03_karcin_mdm.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - my_network
 
   auth_frontend:
-    image: dockerdev.cekino.com/auth_frontend:2.5.3.13
+    image: dockerdev.cekino.com/auth_frontend:2.5.3.14
     container_name: auth_frontend
     ports:
-      - "3000:80" # Frontend uygulamanızın portu
+      - "3000:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - auth_frontend_data:/data
     networks:
       - my_network
 
@@ -49,9 +43,11 @@ services:
     ports:
       - "7281:8081"
     volumes:
+      - auth_data:/data
       - ./etcAuth/com.karcin.security.datasource.postgres.cfg:/opt/karaf/etc/com.karcin.security.datasource.postgres.cfg
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - my_network
 
@@ -59,7 +55,14 @@ services:
     image: dockerdev.cekino.com/mdm_frontend:2.5.3.49
     container_name: mdm_frontend
     ports:
-      - "3001:80" # Frontend uygulamanızın portu
+      - "3001:80"
+    depends_on:
+      db:
+        condition: service_healthy
+      auth:
+        condition: service_started
+    volumes:
+      - mdm_frontend_data:/data
     networks:
       - my_network
 
@@ -69,11 +72,14 @@ services:
     ports:
       - "7290:8081"
     volumes:
+      - mdm_data:/data
       - ./etcMDM/com.karcin.mdm.datasource.cfg:/opt/karaf/etc/com.karcin.mdm.datasource.cfg
       - ./etcMDM/com.karcin.mdm.cfg:/opt/karaf/etc/com.karcin.mdm.cfg
     depends_on:
-      - db
-      - auth
+      db:
+        condition: service_healthy
+      auth:
+        condition: service_started
     networks:
       - my_network
 
@@ -83,12 +89,14 @@ services:
     ports:
       - "5224:5224"
     volumes:
+      - log_center_data:/data
       - ./etcLC/com.karcin.log.datasource.cfg:/opt/karaf/etc/com.karcin.log.datasource.cfg
       - ./etcLC/com.karcin.log.cfg:/opt/karaf/etc/com.karcin.log.cfg
     depends_on:
-      - db
-      - mongodb
-      - rabbitmq
+      db:
+        condition: service_healthy
+      mdm:
+        condition: service_started
     networks:
       - my_network
 
@@ -98,32 +106,39 @@ services:
     ports:
       - "443:443"
     volumes:
+      - nginx_data:/data
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/ssl/mycerts:/etc/nginx/certs:ro
     depends_on:
-      - auth
+      auth:
+        condition: service_started
     networks:
       - my_network
 
   redis:
-    container_name: 'redis'
+    container_name: redis
     ports:
-      - '6379:6379'
-    image: 'redis:6.2-alpine'
+      - "6379:6379"
+    image: redis:6.2-alpine
     restart: always
-    command: redis-server  --requirepass Cekino.123! --save "" --appendonly no
+    command: redis-server --requirepass Cekino.123! --save "" --appendonly no
+    volumes:
+      - redis_data:/data
     networks:
       - my_network
 
   rabbitmq:
     hostname: "rabbit1"
     image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
+    container_name: rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq/
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - my_network
 
@@ -138,6 +153,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: gardiyan
       MONGO_INITDB_ROOT_PASSWORD: Cekino.123!
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - my_network
 
@@ -145,28 +163,36 @@ services:
     image: sp9989/openfire:latest
     container_name: openfire
     ports:
-      - "9090:9090" # Openfire yönetim konsolu (HTTP)
-      - "9091:9091" # Openfire yönetim konsolu (HTTPS)
-      - "5222:5222" # XMPP istemcileri için
-      - "5269:5269" # Sunucular arası bağlantılar için
+      - "9090:9090"
+      - "9091:9091"
+      - "5222:5222"
+      - "5269:5269"
     volumes:
+      - openfire_data:/data
       - ./backup/conf:/opt/openfire/conf
       - ./backup/logs:/opt/openfire/logs
       - ./backup/plugins:/opt/openfire/plugins
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
     networks:
       - my_network
     restart: always
 
 volumes:
   db_data:
-  cache_data:
+  auth_frontend_data:
+  auth_data:
+  mdm_frontend_data:
+  mdm_data:
+  log_center_data:
+  nginx_data:
+  redis_data:
   rabbitmq_data:
   mongodb_data:
-  openfire_conf:
-  openfire_logs:
-  openfire_plugins:
+  openfire_data:
 
 networks:
   my_network:

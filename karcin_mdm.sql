@@ -1,9 +1,6 @@
---
--- PostgreSQL database dump
---
+\c karcin_mdm
 
--- Dumped from database version 13.18 (Debian 13.18-1.pgdg120+1)
--- Dumped by pg_dump version 13.18 (Debian 13.18-1.pgdg120+1)
+
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2041,4 +2038,5 @@ ALTER TABLE ONLY public.kr_agent_program_install_result
 --
 -- PostgreSQL database dump complete
 --
+
 

@@ -1,9 +1,5 @@
---
--- PostgreSQL database dump
---
 
--- Dumped from database version 13.18 (Debian 13.18-1.pgdg120+1)
--- Dumped by pg_dump version 13.18 (Debian 13.18-1.pgdg120+1)
+\c karcin_auth
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
