@@ -67,11 +67,11 @@ services:
       POSTGRES_PASSWORD: Cekino.123!
     ports:
       - "7100:5432"
-   # volumes:
-   # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-   #  - ./karcin_auth.sql:/docker-entrypoint-initdb.d/karcin_auth.sql
-   #  - ./karcin_log.sql:/docker-entrypoint-initdb.d/karcin_log.sql
-   #  - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/karcin_mdm.sql
+    volumes:
+    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    #  - ./karcin_auth.sql:/docker-entrypoint-initdb.d/karcin_auth.sql
+    #  - ./karcin_log.sql:/docker-entrypoint-initdb.d/karcin_log.sql
+    #  - ./karcin_mdm.sql:/docker-entrypoint-initdb.d/karcin_mdm.sql
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -87,8 +87,8 @@ services:
         psql -U postgres -c 'CREATE DATABASE karcin_mdm;' &&
         pg_restore -U postgres -d karcin_auth /data/karcin_auth.sql &&
         pg_restore -U postgres -d karcin_log /data/karcin_log.sql &&
-        pg_restore -U postgres -d karcin_mdm /data/karcin_mdm.sql
-      "
+        pg_restore -U postgres -d karcin_mdm /data/karcin_mdm.sql "
+      
     networks:
       - my_network
 
